@@ -41,7 +41,6 @@
 							<span class="micon dw dw-apartment"></span><span class="mtext"> Leave </span>
 						</a>
 						<ul class="submenu">
-							<li><a href="apply_leave.php">Apply Leave</a></li>
 							<li><a href="leaves.php">All Leave</a></li>
 							<li><a href="pending_leave.php">Pending Leave</a></li>
 							<li><a href="approved_leave.php">Approved Leave</a></li>

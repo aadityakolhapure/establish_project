@@ -1,49 +1,59 @@
-<?php include('includes/header.php')?>
-<?php include('../includes/session.php')?>
+<?php include('includes/header.php') ?>
+<?php include('../includes/session.php') ?>
 <?php
-if(isset($_POST['new_update']))
-{
-	$empid=$session_id;
-	$fname=$_POST['fname'];
-	$lname=$_POST['lastname'];   
-	$email=$_POST['email'];  
-	$dob=$_POST['dob']; 
-	$department=$_POST['department']; 
-	$address=$_POST['address']; 
-	$gender=$_POST['gender'];  
-	$phonenumber=$_POST['phonenumber'];
+if (isset($_POST['new_update'])) {
+	$empid = $session_id;
+	$fname = $_POST['fname'];
+	$lname = $_POST['lastname'];
+	$email = $_POST['email'];
+	$dob = $_POST['dob'];
+	$department = $_POST['department'];
+	$address = $_POST['address'];
+	$gender = $_POST['gender'];
+	$phonenumber = $_POST['phonenumber'];
+	$emp = $_POST['emp'];
+	$aadhar = $_POST['aadhar'];
+	$pan = $_POST['pan'];
+	$caste = $_POST['caste'];
+	$subcaste = $_POST['subcaste'];
+	$ssc = $_POST['ssc'];
+	$hsc = $_POST['hsc'];
+	$be = $_POST['be'];
+	$pg = $_POST['pg'];
+	$phd = $_POST['phd'];
+	$publication = $_POST['publication'];
+	$journal = $_POST['journal'];
+	$patent = $_POST['patent'];
 
-    $result = mysqli_query($conn,"update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber' where emp_id='$session_id'         
-		")or die(mysqli_error());
-    if ($result) {
-     	echo "<script>alert('Your records Successfully Updated');</script>";
-     	echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
-	} else{
-	  die(mysqli_error());
-   }
-
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
+		") or die(mysqli_error());
+	if ($result) {
+		echo "<script>alert('Your records Successfully Updated');</script>";
+		echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
+	} else {
+		die(mysqli_error());
+	}
 }
 
 if (isset($_POST["update_image"])) {
 
 	$image = $_FILES['image']['name'];
 
-	if(!empty($image)){
-		move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/'.$image);
-		$location = $image;	
-	}
-	else {
+	if (!empty($image)) {
+		move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/' . $image);
+		$location = $image;
+	} else {
 		echo "<script>alert('Please Select Picture to Update');</script>";
 	}
 
-    $result = mysqli_query($conn,"update tblemployees set location='$location' where emp_id='$session_id'         
-		")or die(mysqli_error());
-    if ($result) {
-     	echo "<script>alert('Profile Picture Updated');</script>";
-     	echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
-	} else{
-	  die(mysqli_error());
-   }
+	$result = mysqli_query($conn, "update tblemployees set location='$location' where emp_id='$session_id'         
+		") or die(mysqli_error());
+	if ($result) {
+		echo "<script>alert('Profile Picture Updated');</script>";
+		echo "<script type='text/javascript'> document.location = 'my_profile.php'; </script>";
+	} else {
+		die(mysqli_error());
+	}
 }
 
 ?>
@@ -62,11 +72,11 @@ if (isset($_POST["update_image"])) {
 		</div>
 	</div>
 
-	<?php include('includes/navbar.php')?>
+	<?php include('includes/navbar.php') ?>
 
-	<?php include('includes/right_sidebar.php')?>
+	<?php include('includes/right_sidebar.php') ?>
 
-	<?php include('includes/left_sidebar.php')?>
+	<?php include('includes/left_sidebar.php') ?>
 
 	<div class="mobile-menu-overlay"></div>
 
@@ -83,7 +93,7 @@ if (isset($_POST["update_image"])) {
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="admin_dashboard">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Profile</li>
 								</ol>
 							</nav>
@@ -94,13 +104,13 @@ if (isset($_POST["update_image"])) {
 					<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
 						<div class="pd-20 card-box height-100-p">
 
-							<?php $query= mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where emp_id = '$session_id'")or die(mysqli_error());
-								$row = mysqli_fetch_array($query);
+							<?php $query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where emp_id = '$session_id'") or die(mysqli_error());
+							$row = mysqli_fetch_array($query);
 							?>
 
 							<div class="profile-photo">
 								<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
-								<img src="<?php echo (!empty($row['location'])) ? '../uploads/'.$row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" class="avatar-photo">
+								<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" class="avatar-photo">
 								<form method="post" enctype="multipart/form-data">
 									<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -109,7 +119,7 @@ if (isset($_POST["update_image"])) {
 													<div class="form-group">
 														<div class="custom-file">
 															<input name="image" id="file" type="file" class="custom-file-input" accept="image/*" onchange="validateImage('file')">
-															<label class="custom-file-label" for="file" id="selector">Choose file</label>		
+															<label class="custom-file-label" for="file" id="selector">Choose file</label>
 														</div>
 													</div>
 												</div>
@@ -122,7 +132,7 @@ if (isset($_POST["update_image"])) {
 									</div>
 								</form>
 							</div>
-							<h5 class="text-center h5 mb-0"><?php echo $row['FirstName']. " " .$row['LastName']; ?></h5>
+							<h5 class="text-center h5 mb-0"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></h5>
 							<p class="text-center text-muted font-14"><?php echo $row['DepartmentName']; ?></p>
 							<div class="profile-info">
 								<h5 class="mb-20 h5 text-blue">Contact Information</h5>
@@ -164,39 +174,41 @@ if (isset($_POST["update_image"])) {
 										<div class="tab-pane fade show active" id="timeline" role="tabpanel">
 											<div class="pd-20">
 												<div class="profile-timeline">
-													<?php $query= mysqli_query($conn,"SELECT * from tblleaves where empid = '$session_id'")or die(mysqli_error());
-																while ($row = mysqli_fetch_array($query)) {
-		                        								$id = $row['id'];
-															?>
-													<div class="timeline-month">
-														<h5><?php echo date('d M Y', strtotime($row['PostingDate'])); ?></h5>
-													</div>
-													<div class="profile-timeline-list">
-														<ul>
-															
-															<li>
-																<div class="date"><?php echo $row['num_days']; ?> Days</div>
-																<div class="task-name"><i class="ion-ios-chatboxes"></i><?php echo $row['LeaveType']; ?></div>
-																<p><?php echo $row['Description']; ?></p>
+													<?php $query = mysqli_query($conn, "SELECT * from tblleaves where empid = '$session_id'") or die(mysqli_error());
+													while ($row = mysqli_fetch_array($query)) {
+														$id = $row['id'];
+													?>
+														<div class="timeline-month">
+															<h5><?php echo date('d M Y', strtotime($row['PostingDate'])); ?></h5>
+														</div>
+														<div class="profile-timeline-list">
+															<ul>
 
-																<div class="task-time">
-																	<?php $stats=$row['Status'];
-								                                       if($stats==1){
-								                                        ?>
-								                                           <span style="color: green">Approved</span>
-								                                            <?php } if($stats==2)  { ?>
-								                                           <span style="color: red">Not Approved</span>
-								                                            <?php } if($stats==0)  { ?>
-									                                       <span style="color: blue">Pending</span>
-									                                <?php } ?>
-																</div>
+																<li>
+																	<div class="date"><?php echo $row['num_days']; ?> Days</div>
+																	<div class="task-name"><i class="ion-ios-chatboxes"></i><?php echo $row['LeaveType']; ?></div>
+																	<p><?php echo $row['Description']; ?></p>
 
-															</li>
-															
-															
-														</ul>
-													</div>
-												<?php }?>
+																	<div class="task-time">
+																		<?php $stats = $row['Status'];
+																		if ($stats == 1) {
+																		?>
+																			<span style="color: green">Approved</span>
+																		<?php }
+																		if ($stats == 2) { ?>
+																			<span style="color: red">Not Approved</span>
+																		<?php }
+																		if ($stats == 0) { ?>
+																			<span style="color: blue">Pending</span>
+																		<?php } ?>
+																	</div>
+
+																</li>
+
+
+															</ul>
+														</div>
+													<?php } ?>
 												</div>
 											</div>
 										</div>
@@ -206,10 +218,12 @@ if (isset($_POST["update_image"])) {
 											<div class="profile-setting">
 												<form method="POST" enctype="multipart/form-data">
 													<div class="profile-edit-list row">
-														<div class="col-md-12"><h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4></div>
+														<div class="col-md-12">
+															<h4 class="text-blue h5 mb-20">Edit Your Personal Setting</h4>
+														</div>
 
 														<?php
-														$query = mysqli_query($conn,"select * from tblemployees where emp_id = '$session_id' ")or die(mysqli_error());
+														$query = mysqli_query($conn, "select * from tblemployees where emp_id = '$session_id' ") or die(mysqli_error());
 														$row = mysqli_fetch_array($query);
 														?>
 														<div class="weight-500 col-md-6">
@@ -246,14 +260,13 @@ if (isset($_POST["update_image"])) {
 															<div class="form-group">
 																<label>Gender</label>
 																<select name="gender" class="custom-select form-control" required="true" autocomplete="off">
-																<option value="<?php echo $row['Gender']; ?>"><?php echo $row['Gender']; ?></option>
+																	<option value="<?php echo $row['Gender']; ?>"><?php echo $row['Gender']; ?></option>
 																	<option value="male">Male</option>
 																	<option value="female">Female</option>
 																</select>
 															</div>
 														</div>
 														<div class="weight-500 col-md-6">
-															
 															<div class="form-group">
 																<label>Address</label>
 																<input name="address" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['Address']; ?>">
@@ -264,31 +277,124 @@ if (isset($_POST["update_image"])) {
 																<label>Department</label>
 																<select name="department" class="custom-select form-control" required="true" autocomplete="off">
 																	<?php
-																		$query_staff = mysqli_query($conn,"select * from tblemployees join  tbldepartments where emp_id = '$session_id'")or die(mysqli_error());
-																		$row_staff = mysqli_fetch_array($query_staff);
-																		
-																	 ?>
+																	$query_staff = mysqli_query($conn, "select * from tblemployees join  tbldepartments where emp_id = '$session_id'") or die(mysqli_error());
+																	$row_staff = mysqli_fetch_array($query_staff);
+
+																	?>
 																	<option value="<?php echo $row_staff['DepartmentShortName']; ?>"><?php echo $row_staff['DepartmentName']; ?></option>
-																		<?php
-																		$query = mysqli_query($conn,"select * from tbldepartments");
-																		while($row = mysqli_fetch_array($query)){
-																		
-																		?>
+																	<?php
+																	$query = mysqli_query($conn, "select * from tbldepartments");
+																	while ($row = mysqli_fetch_array($query)) {
+
+																	?>
 																		<option value="<?php echo $row['DepartmentShortName']; ?>"><?php echo $row['DepartmentName']; ?></option>
-																		<?php } ?>
+																	<?php } ?>
 																</select>
 															</div>
 														</div>
 														<div class="weight-500 col-md-6">
 															<?php
-																$query = mysqli_query($conn,"select * from tblemployees where emp_id = '$session_id' ")or die(mysqli_error());
-																$row = mysqli_fetch_array($query);
+															$query = mysqli_query($conn, "select * from tblemployees where emp_id = '$session_id' ") or die(mysqli_error());
+															$row = mysqli_fetch_array($query);
 															?>
 															<div class="form-group">
 																<label>Available Leave Days</label>
 																<input class="form-control form-control-lg" type="text" required="true" autocomplete="off" readonly value="<?php echo $row['Av_leave']; ?>">
 															</div>
 														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Employee id</label>
+																<input name="emp" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['emp']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Aadhar number</label>
+																<input name="aadhar" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['aadhar']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Pan number</label>
+																<input name="pan" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['pan']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Caste</label>
+																<input name="caste" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['caste']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Sub Caste</label>
+																<input name="subcaste" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['subcaste']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>SSC marks</label>
+																<input name="ssc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['ssc']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Hsc marks</label>
+																<input name="hsc" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['hsc']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>BE/B.Tech marks</label>
+																<input name="be" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['be']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Post Graduation marks</label>
+																<input name="pg" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['pg']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>PHD marks</label>
+																<input name="phd" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['phd']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Publication</label>
+																<input name="publication" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['publication']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Journal</label>
+																<input name="journal" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['journal']; ?>">
+															</div>
+														</div>
+
+														<div class="weight-500 col-md-6">
+															<div class="form-group">
+																<label>Patent</label>
+																<input name="patent" class="form-control form-control-lg" type="text" placeholder="" required="true" autocomplete="off" value="<?php echo $row['patent']; ?>">
+															</div>
+														</div>
+
+
 														<div class="weight-500 col-md-6">
 															<div class="form-group">
 																<label></label>
@@ -313,7 +419,7 @@ if (isset($_POST["update_image"])) {
 		</div>
 	</div>
 	<!-- js -->
-	<?php include('includes/scripts.php')?>
+	<?php include('includes/scripts.php') ?>
 
 	<script type="text/javascript">
 		var loader = function(e) {
@@ -329,24 +435,25 @@ if (isset($_POST["update_image"])) {
 		fileInput.addEventListener("change", loader);
 	</script>
 	<script type="text/javascript">
-		 function validateImage(id) {
-		    var formData = new FormData();
-		    var file = document.getElementById(id).files[0];
-		    formData.append("Filedata", file);
-		    var t = file.type.split('/').pop().toLowerCase();
-		    if (t != "jpeg" && t != "jpg" && t != "png") {
-		        alert('Please select a valid image file');
-		        document.getElementById(id).value = '';
-		        return false;
-		    }
-		    if (file.size > 1050000) {
-		        alert('Max Upload size is 1MB only');
-		        document.getElementById(id).value = '';
-		        return false;
-		    }
+		function validateImage(id) {
+			var formData = new FormData();
+			var file = document.getElementById(id).files[0];
+			formData.append("Filedata", file);
+			var t = file.type.split('/').pop().toLowerCase();
+			if (t != "jpeg" && t != "jpg" && t != "png") {
+				alert('Please select a valid image file');
+				document.getElementById(id).value = '';
+				return false;
+			}
+			if (file.size > 1050000) {
+				alert('Max Upload size is 1MB only');
+				document.getElementById(id).value = '';
+				return false;
+			}
 
-		    return true;
+			return true;
 		}
 	</script>
 </body>
+
 </html>

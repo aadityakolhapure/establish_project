@@ -26,23 +26,23 @@
 		<div class="pd-ltr-20">
 			<div class="page-header">
 				<div class="row">
-						<div class="col-md-6 col-sm-12">
+					<div class="col-md-6 col-sm-12">
 							<div class="title">
 								<h4>Leave Portal</h4>
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-									<li class="breadcrumb-item active" aria-current="page">All Leave</li>
+									<li class="breadcrumb-item active" aria-current="page">Pending Leave</li>
 								</ol>
 							</nav>
-						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="card-box mb-30">
 				<div class="pd-20">
-						<h2 class="text-blue h4">ALL LEAVE APPLICATIONS</h2>
+						<h2 class="text-blue h4">PENDING LEVAE</h2>
 					</div>
 				<div class="pb-20">
 					<table class="data-table table stripe hover nowrap">
@@ -60,10 +60,10 @@
 							<tr>
 
 								<?php 
-								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status,tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblemployees.role = 'Staff'/* and tblemployees.Department = '$session_depart' */order by lid desc limit 10";
+								$status=0;
+								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status,tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.Status= '$status' and tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' order by lid desc";
 									$query = mysqli_query($conn, $sql) or die(mysqli_error());
 									while ($row = mysqli_fetch_array($query)) {
-
 								 ?>  
 
 								<td class="table-plus">
@@ -99,14 +99,8 @@
 	                             <?php } ?>
 	                            </td>
 								<td>
-									<div class="dropdown">
-										<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-											<i class="dw dw-more"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-											<a class="dropdown-item" href="leave_details.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-eye"></i> View</a>
-											<a class="dropdown-item" href="admin_dashboard.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
-										</div>
+									<div class="table-actions">
+										<a title="VIEW" href="leave_details.php?leaveid=<?php echo $row['lid'];?>"><i class="dw dw-eye" data-color="#265ed7"></i></a>	
 									</div>
 								</td>
 							</tr>

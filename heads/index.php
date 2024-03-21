@@ -35,10 +35,10 @@
 								$row = mysqli_fetch_array($query);
 						?>
 
-						<h4 class="font-20 weight-500 mb-10 text-capitalize">
+						<h4 class="font-20 weight-500 mb-10 text-capitalize"> 
 							Welcome back <div class="weight-600 font-30 text-blue"><?php echo $row['FirstName']. " " .$row['LastName']; ?>,</div>
 						</h4>
-						<p class="font-18 max-width-600">you are in an institution established to serve the wider Christian community in Ghana and Africa.</p>
+						<p class="font-18 max-width-600">in Dnyanshree Institute of Engineering and Technology, Satara as a <?php echo $row['role'] ?></p>
 					</div>
 				</div>
 			</div>
@@ -143,83 +143,109 @@
 			</div>
 
 			<div class="row">
+
 				<div class="col-lg-4 col-md-6 mb-20">
 					<div class="card-box height-100-p pd-20 min-height-200px">
 						<div class="d-flex justify-content-between pb-10">
-							<div class="h5 mb-0">Department Heads</div>
+							<div class="h5 mb-0">Principal</div>
 							<div class="table-actions">
-								<a title="VIEW" href="staff.php"><i class="icon-copy ion-disc" data-color="#17a2b8"></i></a>	
+								<!-- <a title="VIEW" href="staff.php"><i class="icon-copy ion-disc" data-color="#17a2b8"></i></a>	 -->
 							</div>
 						</div>
 						<div class="user-list">
 							<ul>
 								<?php
-		                         $query = mysqli_query($conn,"select * from tblemployees where role = 'HOD' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
-		                         while ($row = mysqli_fetch_array($query)) {
-		                         $id = $row['emp_id'];
-		                             ?>
+								$query = mysqli_query($conn, "select * from tblemployees where role='Principal' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($query)) {
+									$id = $row['emp_id'];
+								?>
 
-								<li class="d-flex align-items-center justify-content-between">
-									<div class="name-avatar d-flex align-items-center pr-2">
-										<div class="avatar mr-2 flex-shrink-0">
-											<img src="<?php echo (!empty($row['location'])) ? '../uploads/'.$row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 box-shadow" width="50" height="50" alt="">
+									<li class="d-flex align-items-center justify-content-between">
+										<div class="name-avatar d-flex align-items-center pr-2">
+											<div class="avatar mr-2 flex-shrink-0">
+												<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 box-shadow" width="50" height="50" alt="">
+											</div>
+											<div class="txt">
+												<span class="badge badge-pill badge-sm" data-bgcolor="#e7ebf5" data-color="#265ed7"><?php echo $row['Department']; ?></span>
+												<div class="font-14 weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
+												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
+											</div>
 										</div>
-										<div class="txt">
-											<span class="badge badge-pill badge-sm" data-bgcolor="#e7ebf5" data-color="#265ed7"><?php echo $row['Department']; ?></span>
-											<div class="font-14 weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
-											<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
-										</div>
-									</div>
-									<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
-								</li>
-								<?php }?>
+										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+									</li>
+								<?php } ?>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 mb-20">
 					<div class="card-box height-100-p pd-20 min-height-200px">
-						<div class="d-flex justify-content-between">
-							<div class="h5 mb-0">Application Setup</div>
+						<div class="d-flex justify-content-between pb-10">
+							<div class="h5 mb-0">Department Heads</div>
 							<div class="table-actions">
-								<a title="VIEW" href="staff.php"><i class="icon-copy ion-disc" data-color="#17a2b8"></i></a>	
+								<!-- <a title="VIEW" href="staff.php"><i class="icon-copy ion-disc" data-color="#17a2b8"></i></a>	 -->
 							</div>
 						</div>
+						<div class="user-list">
+							<ul>
+								<?php
+								$query = mysqli_query($conn, "select * from tblemployees where role='HOD' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($query)) {
+									$id = $row['emp_id'];
+								?>
 
-						<div id="application-chart"></div>
+									<li class="d-flex align-items-center justify-content-between">
+										<div class="name-avatar d-flex align-items-center pr-2">
+											<div class="avatar mr-2 flex-shrink-0">
+												<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 box-shadow" width="50" height="50" alt="">
+											</div>
+											<div class="txt">
+												<span class="badge badge-pill badge-sm" data-bgcolor="#e7ebf5" data-color="#265ed7"><?php echo $row['Department']; ?></span>
+												<div class="font-14 weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
+												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
+											</div>
+										</div>
+										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+									</li>
+								<?php } ?>
+							</ul>
+						</div>
 					</div>
 				</div>
+
+
+
 				<div class="col-lg-4 col-md-6 mb-20">
 					<div class="card-box height-100-p pd-20 min-height-200px">
 						<div class="d-flex justify-content-between">
 							<div class="h5 mb-0">Staff</div>
-							<div class="table-actions">
+							<!-- <div class="table-actions">
 								<a title="VIEW" href="staff.php"><i class="icon-copy ion-disc" data-color="#17a2b8"></i></a>	
-							</div>
+							</div> -->
 						</div>
 
 						<div class="user-list">
 							<ul>
 								<?php
-		                         $query = mysqli_query($conn,"select * from tblemployees where role = 'Staff' and Department = '$session_depart' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
-		                         while ($row = mysqli_fetch_array($query)) {
-		                         $id = $row['emp_id'];
-		                             ?>
+								$query = mysqli_query($conn, "select * from tblemployees where role = 'Staff' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($query)) {
+									$id = $row['emp_id'];
+								?>
 
-								<li class="d-flex align-items-center justify-content-between">
-									<div class="name-avatar d-flex align-items-center pr-2">
-										<div class="avatar mr-2 flex-shrink-0">
-											<img src="<?php echo (!empty($row['location'])) ? '../uploads/'.$row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 box-shadow" width="50" height="50" alt="">
+									<li class="d-flex align-items-center justify-content-between">
+										<div class="name-avatar d-flex align-items-center pr-2">
+											<div class="avatar mr-2 flex-shrink-0">
+												<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 box-shadow" width="50" height="50" alt="">
+											</div>
+											<div class="txt">
+												<span class="badge badge-pill badge-sm" data-bgcolor="#e7ebf5" data-color="#265ed7"><?php echo $row['Department']; ?></span>
+												<div class="font-14 weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
+												<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
+											</div>
 										</div>
-										<div class="txt">
-											<span class="badge badge-pill badge-sm" data-bgcolor="#e7ebf5" data-color="#265ed7"><?php echo $row['Department']; ?></span>
-											<div class="font-14 weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
-											<div class="font-12 weight-500" data-color="#b2b1b6"><?php echo $row['EmailId']; ?></div>
-										</div>
-									</div>
-									<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
-								</li>
-								<?php }?>
+										<div class="font-12 weight-500" data-color="#17a2b8"><?php echo $row['Phonenumber']; ?></div>
+									</li>
+								<?php } ?>
 							</ul>
 						</div>
 					</div>
@@ -246,7 +272,7 @@
 
 								<?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblemployees.role = 'Staff' and Department = '$session_depart' order by lid desc limit 5";
 									$query = $dbh -> prepare($sql);
-									$query->execute();
+									$query->execute(); 
 									$results=$query->fetchAll(PDO::FETCH_OBJ);
 									$cnt=1;
 									if($query->rowCount() > 0)

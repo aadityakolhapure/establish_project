@@ -38,12 +38,7 @@
 						<span class="micon dw dw-edit-2"></span><span class="mtext">Visit Us</span>
 					</a>
 				</li>
-				<li>
-					<a href="#" class="dropdown-toggle no-arrow">
-						<span class="micon dw dw-paper-plane1"></span>
-						<span class="mtext">Faculty </span>
-					</a>
-				</li>
+				
 			</ul>
 		</div>
 	</div>
