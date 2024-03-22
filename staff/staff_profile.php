@@ -50,7 +50,7 @@ if (isset($_POST["update_image"])) {
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Profile Picture Updated');</script>";
-		echo "<script type='text/javascript'> document.location = 'my_profile.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
 	} else {
 		die(mysqli_error());
 	}
