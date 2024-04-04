@@ -108,19 +108,19 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>First Name :</label>
-											<input name="firstname" type="text" class="form-control wizard-required" required="true" autocomplete="off" value="<?php echo $row['FirstName']; ?>">
+											<span name="firstname" class="form-control wizard-required" required="true" autocomplete="off" value=""><?php echo $row['FirstName']; ?></span>
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Last Name :</label>
-											<input name="lastname" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $row['LastName']; ?>">
+											<span name="lastname" class="form-control" required="true" autocomplete="off" value=""><?php echo $row['LastName']; ?></span>
 										</div>
 									</div>
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>Email Address :</label>
-											<input name="email" type="email" class="form-control" required="true" autocomplete="off" value="<?php echo $row['EmailId']; ?>">
+											<span name="email" class="form-control" required="true" autocomplete="off" value=""><?php echo $row['EmailId']; ?></span>
 										</div>
 									</div>
 								</div>
@@ -135,7 +135,7 @@ if (isset($_POST['add_staff'])) {
 										<div class="form-group">
 											<label>Gender :</label>
 											<select name="gender" class="custom-select form-control" required="true" autocomplete="off">
-												<option value="<?php echo $row['Gender']; ?>"><?php echo $row['Gender']; ?></option>
+												<span value=""><?php echo $row['Gender']; ?></span>
 												<option value="male">Male</option>
 												<option value="female">Female</option>
 											</select>
@@ -273,7 +273,7 @@ if (isset($_POST['add_staff'])) {
 									<div class="col-md-4 col-sm-12">
 										<div class="form-group">
 											<label>HSC marks :</label>
-											<input name="hsc" type="text" class="form-control" required="true" autocomplete="off" value="<?php echo $new_row['hsc']; ?>">
+											<span name="hsc" class="form-control" required="true" autocomplete="off" value=""><?php echo $new_row['hsc']; ?></span>
 										</div>
 									</div>
 
@@ -328,18 +328,6 @@ if (isset($_POST['add_staff'])) {
 										</div>
 									</div>
 								</div>
-
-								<div class="col-md-4 col-sm-12 text-align-center">
-									<div class="form-group">
-										<label style="font-size:16px;"><b></b></label>
-										<div class="modal-footer justify-content-center">
-											<button class="btn btn-primary" name="add_staff" id="add_staff" data-toggle="modal">Update&nbsp;Staff</button>
-										</div>
-									</div>
-								</div>
-
-
-
 							</section>
 						</form>
 					</div>

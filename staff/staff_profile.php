@@ -168,6 +168,9 @@ if (isset($_POST["update_image"])) {
 										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Upload Document</a>
+										</li>
 									</ul>
 									<div class="tab-content">
 										<!-- Timeline Tab start -->

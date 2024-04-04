@@ -11,7 +11,7 @@ if (isset($_POST['new_update'])) {
 	$address = $_POST['address'];
 	$gender = $_POST['gender'];
 	$phonenumber = $_POST['phonenumber'];
-	$emp = $_POST['emp_id'];
+	$emp = $_POST['emp'];
 	$aadhar = $_POST['aadhar'];
 	$pan = $_POST['pan'];
 	$caste = $_POST['caste'];
@@ -25,11 +25,11 @@ if (isset($_POST['new_update'])) {
 	$journal = $_POST['journal'];
 	$patent = $_POST['patent'];
 
-	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp_id = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
+	$result = mysqli_query($conn, "update tblemployees set FirstName='$fname', LastName='$lname', EmailId='$email', Gender='$gender', Dob='$dob', Department='$department', Address='$address', Phonenumber='$phonenumber', emp = '$emp', aadhar = '$aadhar', pan = '$pan', caste = '$caste', subcaste = '$subcaste', ssc = '$ssc', hsc = '$hsc', be = '$be', pg = '$pg', phd = '$phd', publication = '$publication', journal = '$journal', patent = '$patent' where emp_id='$session_id'         
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Your records Successfully Updated');</script>";
-		echo "<script type='text/javascript'> document.location = 'my_profile.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'prin_profile.php'; </script>";
 	} else {
 		die(mysqli_error());
 	}
@@ -50,7 +50,7 @@ if (isset($_POST["update_image"])) {
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Profile Picture Updated');</script>";
-		echo "<script type='text/javascript'> document.location = 'my_profile.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
 	} else {
 		die(mysqli_error());
 	}
@@ -93,7 +93,7 @@ if (isset($_POST["update_image"])) {
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="admin_dashboard">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Profile</li>
 								</ol>
 							</nav>
@@ -167,6 +167,9 @@ if (isset($_POST["update_image"])) {
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Upload Document</a>
 										</li>
 									</ul>
 									<div class="tab-content">

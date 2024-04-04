@@ -1,4 +1,4 @@
-<?php include('includes/header.php')?>
+<?php include('includes_hod/header.php')?>
 <?php include('../includes/session.php')?>
 <?php
 	if(isset($_POST['add_staff']))
@@ -51,11 +51,11 @@
 		</div>
 	</div>
 
-	<?php include('includes/navbar.php')?>
+	<?php include('includes_hod/navbar.php')?>
 
-	<?php include('includes/right_sidebar.php')?>
+	<?php include('includes_hod/right_sidebar.php')?>
 
-	<?php include('includes/left_sidebar.php')?>
+	<?php include('includes_hod/left_sidebar.php')?>
 
 	<div class="mobile-menu-overlay"></div>
 
@@ -199,10 +199,10 @@
 				</div>
 
 			</div>
-			<?php include('includes/footer.php'); ?>
+			<?php include('includes_hod/footer.php'); ?>
 		</div>
 	</div>
 	<!-- js -->
-	<?php include('includes/scripts.php')?>
+	<?php include('includes_hod/scripts.php')?>
 </body>
 </html>
