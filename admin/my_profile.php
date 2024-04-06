@@ -163,9 +163,6 @@ if (isset($_POST["update_image"])) {
 								<div class="tab height-100-p">
 									<ul class="nav nav-tabs customtab" role="tablist">
 										<li class="nav-item">
-											<a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Leave Records</a>
-										</li>
-										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
 									</ul>
@@ -277,15 +274,8 @@ if (isset($_POST["update_image"])) {
 																<label>Department</label>
 																<select name="department" class="custom-select form-control" required="true" autocomplete="off">
 																	<?php
-																	$query_staff = mysqli_query($conn, "select * from tblemployees join  tbldepartments where emp_id = '$session_id'") or die(mysqli_error());
-																	$row_staff = mysqli_fetch_array($query_staff);
-
-																	?>
-																	<option value="<?php echo $row_staff['DepartmentShortName']; ?>"><?php echo $row_staff['DepartmentName']; ?></option>
-																	<?php
-																	$query = mysqli_query($conn, "select * from tbldepartments");
+																	$query = mysqli_query($conn, "SELECT * FROM tbldepartments") or die(mysqli_error());
 																	while ($row = mysqli_fetch_array($query)) {
-
 																	?>
 																		<option value="<?php echo $row['DepartmentShortName']; ?>"><?php echo $row['DepartmentName']; ?></option>
 																	<?php } ?>

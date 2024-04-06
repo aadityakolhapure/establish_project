@@ -62,7 +62,7 @@
 
 								<?php
 								$status = 1;
-								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status,tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.Status= '$status' and tblemployees.role = 'Staff' and tblemployees.Department = department order by lid desc";
+								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status,tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.Status= '$status' and tblemployees.role = 'Staff' and tblemployees.Department ='$session_depart' order by lid desc";
 								$query = mysqli_query($conn, $sql) or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
 								?>

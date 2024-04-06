@@ -144,7 +144,7 @@ if (isset($_GET['delete'])) {
 								<?php
 								//  $teacher_query = mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 
-								$teacher_query = mysqli_query($conn, "select * from tblemployees where role = 'Staff' ORDER BY tblemployees.emp_id") or die(mysqli_error());
+								$teacher_query = mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($teacher_query)) {
 									$id = $row['emp_id'];
 								?>

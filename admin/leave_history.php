@@ -1,35 +1,17 @@
-<?php error_reporting(0);?>
-<?php include('includes/header.php')?>
-<?php include('../includes/session.php')?>
-
-<style>
-	input[type="text"]
-	{
-	    font-size:16px;
-	    color: #0f0d1b;
-	    font-family: Verdana, Helvetica;
+<?php include('includes/header.php') ?>
+<?php include('../includes/session.php') ?>
+<?php
+if (isset($_GET['delete'])) {
+	$delete = $_GET['delete'];
+	$sql = "DELETE FROM tblemployees where emp_id = " . $delete;
+	$result = mysqli_query($conn, $sql);
+	if ($result) {
+		echo "<script>alert('Staff deleted Successfully');</script>";
+		echo "<script type='text/javascript'> document.location = 'staff.php'; </script>";
 	}
+}
 
-	.btn-outline:hover {
-	  color: #fff;
-	  background-color: #524d7d;
-	  border-color: #524d7d; 
-	}
-
-	textarea { 
-		font-size:16px;
-	    color: #0f0d1b;
-	    font-family: Verdana, Helvetica;
-	}
-
-	textarea.text_area{
-        height: 8em;
-        font-size:16px;
-	    color: #0f0d1b;
-	    font-family: Verdana, Helvetica;
-      }
-
-	</style>
+?>
 
 <body>
 	<div class="pre-loader">
@@ -45,208 +27,176 @@
 		</div>
 	</div>
 
-	<?php include('includes/navbar.php')?>
+	<?php include('includes/navbar.php') ?>
 
-	<?php include('includes/right_sidebar.php')?>
+	<?php include('includes/right_sidebar.php') ?>
 
-	<?php include('includes/left_sidebar.php')?>
+	<?php include('includes/left_sidebar.php') ?>
 
 	<div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
 		<div class="pd-ltr-20">
-			<div class="min-height-200px">
-				<div class="page-header">
-					<div class="row">
-						<div class="col-md-6 col-sm-12">
-							<div class="title">
-								<h4>LEAVE DETAILS</h4>
-							</div>
-							<nav aria-label="breadcrumb" role="navigation">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="admin_dashboard.php">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Leave</li>
-								</ol>
-							</nav>
-						</div>
-					</div>
-				</div>
-
-				<div class="pd-20 card-box mb-30">
-					<div class="clearfix">
-						<div class="pull-left">
-							<h4 class="text-blue h4">Leave Details</h4>
-							<p class="mb-20"></p>
-						</div>
-					</div>
-					<form method="post" action="">
-
-						<?php 
-						if(!isset($_GET['edit']) && empty($_GET['edit'])){
-							header('Location: index.php');
-						}
-						else {
-						
-						$lid=intval($_GET['edit']);
-						$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblemployees.Gender,tblemployees.Phonenumber,tblemployees.EmailId,tblemployees.Av_leave,tblleaves.LeaveType,tblleaves.ToDate,tblleaves.FromDate,tblleaves.Description,tblleaves.PostingDate,tblleaves.Status,tblleaves.AdminRemark,tblleaves.admin_status,tblleaves.registra_remarks,tblleaves.AdminRemarkDate,tblleaves.num_days from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.id=:lid";
-						$query = $dbh -> prepare($sql);
-						$query->bindParam(':lid',$lid,PDO::PARAM_STR);
-						$query->execute();
-						$results=$query->fetchAll(PDO::FETCH_OBJ);
-						$cnt=1;
-						if($query->rowCount() > 0)
-						{
-						foreach($results as $result)
-						{         
-						?>  
-
-						<div class="row">
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Full Name</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->FirstName." ".$result->LastName);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Email Address</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->EmailId);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Gender</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-success" readonly value="<?php echo htmlentities($result->Gender);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Phone Number</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->Phonenumber);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Leave Type</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->LeaveType);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Applied Date</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-success" readonly value="<?php echo htmlentities($result->PostingDate);?>">
-								</div>
-							</div>
-
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Applied No. of Days</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->num_days);?>">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Available No. of Days</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="<?php echo htmlentities($result->Av_leave);?>">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Leave Period</b></label>
-									<input type="text" class="selectpicker form-control" data-style="btn-outline-info" readonly value="From <?php echo htmlentities($result->FromDate);?> to <?php echo htmlentities($result->ToDate);?>">
-								</div>
-							</div>
-
-						</div>
-						<div class="form-group row">
-								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Leave Reason</b></label>
-								<div class="col-sm-12 col-md-10">
-									<textarea name=""class="form-control text_area" readonly type="text"><?php echo htmlentities($result->Description);?></textarea>
-								</div>
-						</div>
-						<div class="form-group row">
-								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>HOD Remarks</b></label>
-								<div class="col-sm-12 col-md-10">
-									<?php
-									if ($result->AdminRemark==""): ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
-									<?php else: ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemark); ?>">
-									<?php endif ?>
-								</div>
-						</div>
-						<div class="form-group row">
-								<label style="font-size:16px;" class="col-sm-12 col-md-2 col-form-label"><b>Reg. Remarks</b></label>
-								<div class="col-sm-12 col-md-10">
-									<?php
-									if ($result->registra_remarks==""): ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Waiting for Approval"; ?>">
-									<?php else: ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->registra_remarks); ?>">
-									<?php endif ?>
-								</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-								   <label style="font-size:16px;"><b>Action Taken Date</b></label>
-								   <?php
-									if ($result->AdminRemarkDate==""): ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "NA"; ?>">
-									<?php else: ?>
-									  <input type="text" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo htmlentities($result->AdminRemarkDate); ?>">
-									<?php endif ?>
-
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Leave Status From HOD</b></label>
-									<?php $stats=$result->Status;?>
-									<?php
-									if ($stats==1): ?>
-									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
-									<?php
-									 elseif ($stats==2): ?>
-									  <input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
-									  <?php
-									else: ?>
-									  <input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
-									<?php endif ?>
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label style="font-size:16px;"><b>Registra/Registry Status</b></label>
-									<?php $stats=$result->admin_status;?>
-									<?php
-									if ($stats==1): ?>
-									  <input type="text" style="color: green;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Approved"; ?>">
-									<?php
-									 elseif ($stats==2): ?>
-									  <input type="text" style="color: red; font-size: 16px;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Rejected"; ?>">
-									  <?php
-									else: ?>
-									  <input type="text" style="color: blue;" class="selectpicker form-control" data-style="btn-outline-primary" readonly value="<?php echo "Pending"; ?>">
-									<?php endif ?>
-								</div>
-							</div>
-
-						</div>
-
-						<?php $cnt++;} } }?>
-					</form>
-				</div>
-
+			<div class="title pb-20">
+				<h2 class="h3 mb-0">Leave Breakdown</h2>
 			</div>
-			
+			<div class="row pb-10">
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+
+						<?php
+						$sql = "SELECT id from tblleaves";
+						$query = $dbh->prepare($sql);
+						$query->execute();
+						$results = $query->fetchAll(PDO::FETCH_OBJ);
+						$empcount = $query->rowCount();
+						?>
+
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo ($empcount); ?></div>
+								<div class="font-14 text-secondary weight-500">All Applied Leave</div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-user-2"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+
+						<?php
+						$status = 1;
+						$query = mysqli_query($conn, "select * from tblleaves where empid = 'emp_id' AND Status = '$status'") or die(mysqli_error());
+						$count_reg_staff = mysqli_num_rows($query);
+						?>
+
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo htmlentities($count_reg_staff); ?></div>
+								<div class="font-14 text-secondary weight-500">Approved</div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#09cc06"><span class="icon-copy fa fa-hourglass"></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+
+						<?php
+						$status = 0;
+						$query_pend = mysqli_query($conn, "select * from tblleaves where empid = 'emp_id' AND Status = '$status'") or die(mysqli_error());
+						$count_pending = mysqli_num_rows($query_pend);
+						?>
+
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo ($count_pending); ?></div>
+								<div class="font-14 text-secondary weight-500">Pending</div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon"><i class="icon-copy fa fa-hourglass-end" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+
+						<?php
+						$status = 2;
+						$query_reject = mysqli_query($conn, "select * from tblleaves where empid = 'emp_id' AND Status = '$status'") or die(mysqli_error());
+						$count_reject = mysqli_num_rows($query_reject);
+						?>
+
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark"><?php echo ($count_reject); ?></div>
+								<div class="font-14 text-secondary weight-500">Rejected</div>
+							</div>
+							<div class="widget-icon">
+								<div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-box mb-30">
+				<div class="pd-20">
+					<h2 class="text-blue h4">ALL MY LEAVE</h2>
+				</div>
+				<div class="pb-20">
+					<table class="data-table table stripe hover nowrap">
+						<thead>
+							<tr>
+								<th class="table-plus">LEAVE TYPE</th>
+								<th>DATE FROM</th>
+								<th>DATE TO</th>
+								<th>NO. OF DAYS</th>
+								<th>HOD STATUS</th>
+								<th>REG. STATUS</th>
+								<th class="datatable-nosort">ACTION</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$sql = "SELECT * from tblleaves where empid = 'emp_id'";
+							$query = $dbh->prepare($sql);
+							$query->execute();
+							$results = $query->fetchAll(PDO::FETCH_OBJ);
+							$cnt = 1;
+							if ($query->rowCount() > 0) {
+								foreach ($results as $result) { ?>
+									<tr>
+										<td><?php echo htmlentities($result->LeaveType); ?></td>
+										<td><?php echo htmlentities($result->FromDate); ?></td>
+										<td><?php echo htmlentities($result->ToDate); ?></td>
+										<td><?php echo htmlentities($result->num_days); ?></td>
+										<td><?php
+											$stats = $result->Status;
+											if ($stats == 1) {
+												echo "<span style='color: green'>Approved</span>";
+											} elseif ($stats == 2) {
+												echo "<span style='color: red'>Not Approved</span>";
+											} else {
+												echo "<span style='color: blue'>Pending</span>";
+											}
+											?></td>
+										<td><?php
+											$stats = $result->admin_status;
+											if ($stats == 1) {
+												echo "<span style='color: green'>Approved</span>";
+											} elseif ($stats == 2) {
+												echo "<span style='color: red'>Not Approved</span>";
+											} else {
+												echo "<span style='color: blue'>Pending</span>";
+											}
+											?></td>
+										<td>
+											<div class="table-actions">
+												<a title="VIEW" href="view_leave.php?edit=<?php echo htmlentities($result->id); ?>" data-color="#265ed7"><i class="icon-copy dw dw-eye"></i></a>
+											</div>
+										</td>
+									</tr>
+							<?php
+									$cnt++;
+								}
+							} ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 			<?php include('includes/footer.php'); ?>
 		</div>
 	</div>
 	<!-- js -->
 
-	<?php include('includes/scripts.php')?>
+	<?php include('includes/scripts.php') ?>
 </body>
+
 </html>

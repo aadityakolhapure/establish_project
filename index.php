@@ -75,15 +75,6 @@ if (isset($_POST['signin'])) {
 </head>
 
 <body class="login-page">
-	<div class="login-header box-shadow">
-		<div class="container-fluid d-flex justify-content-between align-items-center">
-			<div class="brand-logo">
-				<a href="login.html">
-					<img src="vendors/images/deskapp-logo-svg.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
 		<div class="container">
 			<div class="row align-items-center">

@@ -29,7 +29,7 @@ if (isset($_POST['new_update'])) {
 		") or die(mysqli_error());
 	if ($result) {
 		echo "<script>alert('Your records Successfully Updated');</script>";
-		echo "<script type='text/javascript'> document.location = 'prin_profile.php'; </script>";
+		echo "<script type='text/javascript'> document.location = 'head_profile.php'; </script>";
 	} else {
 		die(mysqli_error());
 	}

@@ -58,16 +58,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-
-								<?php
-								$status = 1;
-								$reg_status = 2;
-								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status, tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblleaves.Status= '$status' and tblleaves.admin_status= '$reg_status' order by lid desc";
-								$query = mysqli_query($conn, $sql) or die(mysqli_error());
-								while ($row = mysqli_fetch_array($query)) {
-								?>
-
+							<?php
+							$hod_status = 1;
+							$reg_status = 2;
+							$sql = "SELECT tblleaves.id as lid, tblemployees.FirstName, tblemployees.LastName, tblemployees.location, tblemployees.emp_id, tblleaves.LeaveType, tblleaves.PostingDate, tblleaves.Status, tblleaves.admin_status 
+                                    FROM tblleaves 
+                                    JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id 
+                                    WHERE tblleaves.Status = '$hod_status' AND tblleaves.admin_status = '$reg_status' 
+                                    ORDER BY lid DESC";
+							$query = mysqli_query($conn, $sql) or die(mysqli_error());
+							while ($row = mysqli_fetch_array($query)) {
+							?>
+								<tr>
 									<td class="table-plus">
 										<div class="name-avatar d-flex align-items-center">
 											<div class="avatar mr-2 flex-shrink-0">
@@ -80,37 +82,37 @@
 									</td>
 									<td><?php echo $row['LeaveType']; ?></td>
 									<td><?php echo $row['PostingDate']; ?></td>
-									<td><?php $stats = $row['Status'];
+									<td>
+										<?php
+										$stats = $row['Status'];
 										if ($stats == 1) {
+											echo '<span style="color: green">Approved</span>';
+										} elseif ($stats == 2) {
+											echo '<span style="color: red">Rejected</span>';
+										} elseif ($stats == 0) {
+											echo '<span style="color: blue">Pending</span>';
+										}
 										?>
-											<span style="color: green">Approved</span>
-										<?php }
-										if ($stats == 2) { ?>
-											<span style="color: red">Rejected</span>
-										<?php }
-										if ($stats == 0) { ?>
-											<span style="color: blue">Pending</span>
-										<?php } ?>
 									</td>
-									<td><?php $stats = $row['admin_status'];
+									<td>
+										<?php
+										$stats = $row['admin_status'];
 										if ($stats == 1) {
+											echo '<span style="color: green">Approved</span>';
+										} elseif ($stats == 2) {
+											echo '<span style="color: red">Rejected</span>';
+										} elseif ($stats == 0) {
+											echo '<span style="color: blue">Pending</span>';
+										}
 										?>
-											<span style="color: green">Approved</span>
-										<?php }
-										if ($stats == 2) { ?>
-											<span style="color: red">Rejected</span>
-										<?php }
-										if ($stats == 0) { ?>
-											<span style="color: blue">Pending</span>
-										<?php } ?>
 									</td>
 									<td>
 										<div class="table-actions">
 											<a title="VIEW" href="leave_details.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-eye" data-color="#265ed7"></i></a>
 										</div>
 									</td>
-							</tr>
-						<?php } ?>
+								</tr>
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>
@@ -140,7 +142,6 @@
 	<script src="../src/plugins/datatables/js/vfs_fonts.js"></script>
 
 	<script src="../vendors/scripts/datatable-setting.js"></script>
-</body>
 </body>
 
 </html>

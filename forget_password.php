@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8">
-    <title>ACI Leave Manager</title>
+    <title>Establishment Section</title>
 
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
@@ -74,20 +74,12 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="login-page">
-    <div class="login-header box-shadow">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="brand-logo">
-                <a href="login.html">
-                    <img src="vendors/images/deskapp-logo-svg.png" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
+
     <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-lg-7">
-                    <img src="vendors/images/login-page-img.png" alt="">
+                    <img src="vendors/images/forgot-password.png" alt="">
                 </div>
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">

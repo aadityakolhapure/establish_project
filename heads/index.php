@@ -190,7 +190,7 @@
 						<div class="user-list">
 							<ul>
 								<?php
-								$query = mysqli_query($conn, "select * from tblemployees where role='HOD' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								$query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'HOD' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
 									$id = $row['emp_id'];
 								?>
@@ -228,7 +228,7 @@
 						<div class="user-list">
 							<ul>
 								<?php
-								$query = mysqli_query($conn, "select * from tblemployees where role = 'Staff' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								$query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
 									$id = $row['emp_id'];
 								?>

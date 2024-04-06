@@ -30,7 +30,7 @@
 					<div class="col-md-4 user-icon">
 						<img src="../vendors/images/banner-img.png" alt="">
 					</div>
-					<div class="col-md-8"> 
+					<div class="col-md-8">
 
 						<?php $query = mysqli_query($conn, "select * from tblemployees where emp_id = '$session_id'") or die(mysqli_error());
 						$row = mysqli_fetch_array($query);
@@ -282,9 +282,6 @@
 
 									<td class="table-plus">
 										<div class="name-avatar d-flex align-items-center">
-											<div class="txt mr-2 flex-shrink-0">
-												<b><?php echo htmlentities($cnt); ?></b>
-											</div>
 											<div class="txt">
 												<div class="weight-600"><?php echo $row['FirstName'] . " " . $row['LastName']; ?></div>
 											</div>
