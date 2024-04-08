@@ -1,0 +1,102 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container {
+    height: 842px;
+    width: 595px;
+    border: solid;
+
+}
+
+.header {
+    display: flex;
+    width: 440px;
+    height: 100px;
+    padding: 5px;
+    margin-left: 101px;
+
+}
+
+.logo img {
+    height: 100px;
+    margin-right: 50px;
+}
+
+.a1 {
+    font-size: 8px;
+    margin-bottom: -12px;
+}
+
+.name {
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* align-content: center; */
+    align-items: center;
+}
+
+button {
+    flex-direction: column;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    margin-top: -6px;
+}
+
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 5px;
+}
+
+.header3 {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+}
+
+.header4 {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+table,
+td,
+th,
+tr {
+    border: 1px solid;
+    padding: 3px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td ,tr{
+    width: 50%;
+}
+
+td #duty {
+    width: 20px;
+}
+
+table .box {
+    display: flex;
+    flex-direction: row;
+}
+
+.box .da {
+    margin-right: 30px;
+}
