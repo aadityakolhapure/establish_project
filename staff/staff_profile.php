@@ -169,7 +169,7 @@ if (isset($_POST["update_image"])) {
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Upload Document</a>
+											<a class="nav-link" data-toggle="tab" href="#upload" role="tab">Upload Document</a>
 										</li>
 									</ul>
 									<div class="tab-content">
@@ -411,6 +411,83 @@ if (isset($_POST["update_image"])) {
 											</div>
 										</div>
 										<!-- Setting Tab End -->
+										<!-- upload start -->
+										<div class="tab-pane fade height-100-p" id="upload" role="tabpanel">
+											<div class="profile-setting">
+												<div class="profile-photo">
+													<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
+													<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" class="avatar-photo">
+													<form method="post" enctype="multipart/form-data">
+														<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered" role="document">
+																<div class="modal-content">
+																	<div class="weight-500 col-md-12 pd-5">
+																		<div class="form-group">
+																			<div class="custom-file">
+																				<input name="image" id="file" type="file" class="custom-file-input" accept="image/*" onchange="validateImage('file')">
+																				<label class="custom-file-label" for="file" id="selector">Choose file</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<input type="submit" name="update_image" value="Update" class="btn btn-primary">
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+
+												<div class="aadhar-photo">
+													<?php
+													if (isset($_POST["update_aadhar"])) {
+
+														$image = $_FILES['image']['name'];
+
+														if (!empty($image)) {
+															move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/aadhar/' . $image);
+															$location = $image;
+														} else {
+															echo "<script>alert('Please Select Picture to Update');</script>";
+														}
+
+														$result = mysqli_query($conn, "update tblemployees set aadhar_pdf='$aadhar_pdf' where emp_id='$session_id'         
+															") or die(mysqli_error());
+														if ($result) {
+															echo "<script>alert('Aadhar pdf Updated');</script>";
+															echo "<script type='text/javascript'> document.location = 'staff_profile.php'; </script>";
+														} else {
+															die(mysqli_error());
+														}
+													}
+													?>
+													<a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
+													<img src="<?php echo (!empty($row['location'])) ? '../uploads/' . $row['location'] : '../uploads/aadhar/NO-IMAGE-AVAILABLE.jpg'; ?>" alt="" class="avatar-photo">
+													<form method="post" enctype="multipart/form-data">
+														<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered" role="document">
+																<div class="modal-content">
+																	<div class="weight-500 col-md-12 pd-5">
+																		<div class="form-group">
+																			<div class="custom-file">
+																				<input name="image" id="file" type="file" class="custom-file-input" accept="pdf/*" onchange="validateImage('file')">
+																				<label class="custom-file-label" for="file" id="selector">Choose file</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<input type="submit" name="update_aadhar" value="Update" class="btn btn-primary">
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+
 									</div>
 								</div>
 							</div>

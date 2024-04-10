@@ -27,6 +27,13 @@
 					</ul>
 				</li>
 
+				<li class="dropdown">
+					<a href="document.php" class="dropdown-toggle no-arrow">
+						<span class="micon dw dw-house-1"></span><span class="mtext">Upload</span>
+					</a>
+
+				</li>
+
 				<li>
 					<div class="dropdown-divider"></div>
 				</li>
@@ -38,7 +45,7 @@
 						<span class="micon dw dw-edit-2"></span><span class="mtext">Visit Us</span>
 					</a>
 				</li>
-				
+
 			</ul>
 		</div>
 	</div>

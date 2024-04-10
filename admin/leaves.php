@@ -2,6 +2,9 @@
 include('includes/header.php');
 include('../includes/session.php');
 ?>
+    <link rel="stylesheet" href="../js/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/css/datatables.min.css">
+    <link rel="stylesheet" href="../js/css/style.css">
 
 <body>
 	<div class="pre-loader">
@@ -48,7 +51,7 @@ include('../includes/session.php');
 					<h2 class="text-blue h4">LEAVE HISTORY</h2>
 				</div>
 				<div class="pb-20">
-					<table class="data-table table stripe hover nowrap">
+					<table class="data-table table stripe hover nowrap" id="example">
 						<thead>
 							<tr>
 								<th class="table-plus datatable-nosort">Staff Name</th>
@@ -91,7 +94,12 @@ include('../includes/session.php');
 			<?php include('includes/footer.php'); ?>
 		</div>
 	</div>
-
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/custom.js"></script>
+	<script src="../js/datatables.min.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/pdfmake.min.js"></script>
+	<script src="../js/vfs_fonts.js"></script>
 	<!-- js -->
 	<?php include('includes/scripts.php') ?>
 </body>

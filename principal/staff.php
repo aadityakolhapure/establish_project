@@ -38,7 +38,7 @@ if (isset($_GET['delete'])) {
 	<div class="main-container">
 		<div class="pd-ltr-20">
 			<div class="title pb-20">
-				<h2 class="h3 mb-0">Administrative Breakdown</h2>
+				<h2 class="h3 mb-0">Principal Breakdown</h2>
 			</div>
 			<div class="row pb-10">
 				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
@@ -112,7 +112,7 @@ if (isset($_GET['delete'])) {
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
 								<div class="weight-700 font-24 text-dark"><?php echo ($count_reg_admin); ?></div>
-								<div class="font-14 text-secondary weight-500">Head of Department</div>
+								<div class="font-14 text-secondary weight-500">Administrators</div>
 							</div>
 							<div class="widget-icon">
 								<div class="icon" data-color="#ff5b5b"><i class="icon-copy fa fa-hourglass-o" aria-hidden="true"></i></div>
@@ -132,7 +132,7 @@ if (isset($_GET['delete'])) {
 							<tr>
 								<th class="table-plus">FULL NAME</th>
 								<th>EMAIL</th>
-								<th>PHONE NUMBER</th>
+								<th>DEPARTMENT</th>
 								<th>POSITION</th>
 								<th>AVE. LEAVE</th>
 								<th class="datatable-nosort">ACTION</th>
@@ -142,9 +142,7 @@ if (isset($_GET['delete'])) {
 							<tr>
 
 								<?php
-								//  $teacher_query = mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
-
-								$teacher_query = mysqli_query($conn, "select * from tblemployees where role = 'Staff' ORDER BY tblemployees.emp_id") or die(mysqli_error());
+								$teacher_query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where role != 'Admin' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($teacher_query)) {
 									$id = $row['emp_id'];
 								?>
@@ -160,7 +158,7 @@ if (isset($_GET['delete'])) {
 										</div>
 									</td>
 									<td><?php echo $row['EmailId']; ?></td>
-									<td><?php echo $row['Phonenumber']; ?></td>
+									<td><?php echo $row['DepartmentName']; ?></td>
 									<td><?php echo $row['role']; ?></td>
 									<td><?php echo $row['Av_leave']; ?></td>
 									<td>
@@ -170,6 +168,8 @@ if (isset($_GET['delete'])) {
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="edit_staff.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Edit</a>
+												<a class="dropdown-item" href="leave_history.php?emp_id=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Leave History</a>
+
 												<a class="dropdown-item" href="staff.php?delete=<?php echo $row['emp_id'] ?>"><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
 										</div>
@@ -178,7 +178,17 @@ if (isset($_GET['delete'])) {
 						<?php } ?>
 						</tbody>
 					</table>
+					<div class="weight-500 col-md-6">
+						<div class="form-group">
+							<label></label>
+							<div class="modal-footer justify-content-center">
+
+								
+							</div>
+						</div>
+					</div>
 				</div>
+
 			</div>
 
 			<?php include('includes/footer.php'); ?>

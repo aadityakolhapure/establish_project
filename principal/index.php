@@ -158,7 +158,7 @@
 						<div class="user-list">
 							<ul>
 								<?php
-								$query = mysqli_query($conn, "select * from tblemployees where role='Principal' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								$query = mysqli_query($conn, "select * from tblemployees where role='Principal' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
 									$id = $row['emp_id'];
 								?>
@@ -192,7 +192,7 @@
 						<div class="user-list">
 							<ul>
 								<?php
-								$query = mysqli_query($conn, "select * from tblemployees where role='HOD' ORDER BY tblemployees.emp_id desc limit 4") or die(mysqli_error());
+								$query = mysqli_query($conn, "select * from tblemployees where role='HOD' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($query)) {
 									$id = $row['emp_id'];
 								?>
@@ -273,7 +273,7 @@
 						<tbody>
 							<tr>
 
-								<?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblemployees.role = 'Staff' and Department = '$session_depart' order by lid desc limit 5";
+								<?php $sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblemployees.role = 'Staff' order by lid desc limit 5";
 								$query = $dbh->prepare($sql);
 								$query->execute();
 								$results = $query->fetchAll(PDO::FETCH_OBJ);

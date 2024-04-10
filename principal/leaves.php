@@ -1,5 +1,11 @@
-<?php include('includes/header.php')?>
-<?php include('../includes/session.php')?>
+<?php
+include('includes/header.php');
+include('../includes/session.php');
+?>
+    <link rel="stylesheet" href="../js/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/css/datatables.min.css">
+    <link rel="stylesheet" href="../js/css/style.css">
+
 <body>
 	<div class="pre-loader">
 		<div class="pre-loader-box">
@@ -14,11 +20,11 @@
 		</div>
 	</div>
 
-	<?php include('includes/navbar.php')?>
 
-	<?php include('includes/right_sidebar.php')?>
 
-	<?php include('includes/left_sidebar.php')?>
+	<?php include('includes/navbar.php'); ?>
+	<?php include('includes/right_sidebar.php'); ?>
+	<?php include('includes/left_sidebar.php'); ?>
 
 	<div class="mobile-menu-overlay"></div>
 
@@ -26,119 +32,76 @@
 		<div class="pd-ltr-20">
 			<div class="page-header">
 				<div class="row">
-						<div class="col-md-6 col-sm-12">
-							<div class="title">
-								<h4>Leave Portal</h4>
-							</div>
-							<nav aria-label="breadcrumb" role="navigation">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-									<li class="breadcrumb-item active" aria-current="page">All Leave</li>
-								</ol>
-							</nav>
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Leave Portal</h4>
 						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
+								<li class="breadcrumb-item active" aria-current="page">All Leave</li>
+							</ol>
+						</nav>
+					</div>
 				</div>
 			</div>
 
 			<div class="card-box mb-30">
 				<div class="pd-20">
-						<h2 class="text-blue h4">ALL LEAVE APPLICATIONS</h2>
-					</div>
+					<h2 class="text-blue h4">LEAVE HISTORY</h2>
+				</div>
 				<div class="pb-20">
-					<table class="data-table table stripe hover nowrap">
+					<table class="data-table table stripe hover nowrap" id="example">
 						<thead>
 							<tr>
-								<th class="table-plus datatable-nosort">STAFF NAME</th>
-								<th>LEAVE TYPE</th>
-								<th>APPLIED DATE</th>
-								<th>HOD STATUS</th>
-								<th>REG. STATUS</th>
-								<th class="datatable-nosort">ACTION</th>
+								<th class="table-plus datatable-nosort">Staff Name</th>
+								<th>Leave Type</th>
+								<th>Applied Date</th>
+								<th>HOD Status</th>
+								<th>Admin Status</th>
+								<th class="datatable-nosort">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<?php
+							$sql = "SELECT tblleaves.id as leave_id, tblemployees.FirstName, tblemployees.LastName, tblleaves.LeaveType, tblleaves.PostingDate, tblleaves.Status as hod_status, tblleaves.admin_status
+                                    FROM tblleaves 
+                                    INNER JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id";
+							$result = mysqli_query($conn, $sql);
 
-								<?php 
-								$sql = "SELECT tblleaves.id as lid,tblemployees.FirstName,tblemployees.LastName,tblemployees.location,tblemployees.emp_id,tblleaves.LeaveType,tblleaves.PostingDate,tblleaves.Status,tblleaves.admin_status from tblleaves join tblemployees on tblleaves.empid=tblemployees.emp_id where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' order by lid desc limit 10";
-									$query = mysqli_query($conn, $sql) or die(mysqli_error());
-									while ($row = mysqli_fetch_array($query)) {
-
-								 ?>  
-
-								<td class="table-plus">
-									<div class="name-avatar d-flex align-items-center">
-										<div class="avatar mr-2 flex-shrink-0">
-											<img src="<?php echo (!empty($row['location'])) ? '../uploads/'.$row['location'] : '../uploads/NO-IMAGE-AVAILABLE.jpg'; ?>" class="border-radius-100 shadow" width="40" height="40" alt="">
-										</div>
-										<div class="txt">
-											<div class="weight-600"><?php echo $row['FirstName']." ".$row['LastName'];?></div>
-										</div>
-									</div>
-								</td>
-								<td><?php echo $row['LeaveType']; ?></td>
-	                            <td><?php echo $row['PostingDate']; ?></td>
-								<td><?php $stats=$row['Status'];
-	                             if($stats==1){
-	                              ?>
-	                                  <span style="color: green">Approved</span>
-	                                  <?php } if($stats==2)  { ?>
-	                                 <span style="color: red">Rejected</span>
-	                                  <?php } if($stats==0)  { ?>
-	                             <span style="color: blue">Pending</span>
-	                             <?php } ?>
-	                            </td>
-	                            <td><?php $stats=$row['admin_status'];
-	                             if($stats==1){
-	                              ?>
-	                                  <span style="color: green">Approved</span>
-	                                  <?php } if($stats==2)  { ?>
-	                                 <span style="color: red">Rejected</span>
-	                                  <?php } if($stats==0)  { ?>
-	                             <span style="color: blue">Pending</span>
-	                             <?php } ?>
-	                            </td>
-								<td>
-									<div class="dropdown">
-										<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-											<i class="dw dw-more"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-											<a class="dropdown-item" href="leave_details.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-eye"></i> View</a>
-											<a class="dropdown-item" href="admin_dashboard.php?leaveid=<?php echo $row['lid']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<?php }?>
+							if (mysqli_num_rows($result) > 0) {
+								while ($row = mysqli_fetch_assoc($result)) {
+									echo "<tr>";
+									echo "<td class='table-plus'>" . $row['FirstName'] . " " . $row['LastName'] . "</td>";
+									echo "<td>" . $row['LeaveType'] . "</td>";
+									echo "<td>" . $row['PostingDate'] . "</td>";
+									echo "<td>" . ($row['hod_status'] == 1 ? 'Approved' : ($row['hod_status'] == 2 ? 'Rejected' : 'Pending')) . "</td>";
+									echo "<td>" . ($row['admin_status'] == 1 ? 'Approved' : ($row['admin_status'] == 2 ? 'Rejected' : 'Pending')) . "</td>";
+									echo "<td>";
+									echo "<a class='dropdown-item' href='leave_details.php?leaveid=" . $row['leave_id'] . "'><i class='dw dw-eye'></i> View</a>";
+									echo "</td>";
+									echo "</tr>";
+								}
+							} else {
+								echo "<tr><td colspan='6'>No leave history found.</td></tr>";
+							}
+							?>
 						</tbody>
 					</table>
-			   </div>
+				</div>
 			</div>
 
 			<?php include('includes/footer.php'); ?>
 		</div>
 	</div>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/custom.js"></script>
+	<script src="../js/datatables.min.js"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/pdfmake.min.js"></script>
+	<script src="../js/vfs_fonts.js"></script>
 	<!-- js -->
-
-	<script src="../vendors/scripts/core.js"></script>
-	<script src="../vendors/scripts/script.min.js"></script>
-	<script src="../vendors/scripts/process.js"></script>
-	<script src="../vendors/scripts/layout-settings.js"></script>
-	<script src="../src/plugins/apexcharts/apexcharts.min.js"></script>
-	<script src="../src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-	<script src="../src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-	<script src="../src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-	<script src="../src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-
-	<!-- buttons for Export datatable -->
-	<script src="../src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-	<script src="../src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-	<script src="../src/plugins/datatables/js/buttons.print.min.js"></script>
-	<script src="../src/plugins/datatables/js/buttons.html5.min.js"></script>
-	<script src="../src/plugins/datatables/js/buttons.flash.min.js"></script>
-	<script src="../src/plugins/datatables/js/vfs_fonts.js"></script>
-	
-	<script src="../vendors/scripts/datatable-setting.js"></script></body>
+	<?php include('includes/scripts.php') ?>
 </body>
+
 </html>

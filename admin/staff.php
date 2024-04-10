@@ -188,11 +188,11 @@ if (isset($_GET['delete'])) {
 									function exportData() {
 										// // Make an AJAX request to the PHP script
 										var xhr = new XMLHttpRequest();
-										// xhr.onreadystatechange = function() {
-										// 	if (xhr.readyState === 4 && xhr.status === 200) {
-										// 		console.log(xhr.responseText);
-										// 	}
-										// };
+										xhr.onreadystatechange = function() {
+										if (xhr.readyState === 4 && xhr.status === 200) {
+											console.log(xhr.responseText);
+											}
+									    };
 										xhr.open('GET', 'includes/data.php?export=1', true);
 										xhr.send();
 
