@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2024 at 10:09 PM
+-- Generation Time: Apr 11, 2024 at 05:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,7 +62,7 @@ CREATE TABLE `tbldepartments` (
 INSERT INTO `tbldepartments` (`id`, `DepartmentName`, `code`, `DepartmentShortName`, `CreationDate`) VALUES
 (2, 'Information Technologies', '6789', 'ICT', '2017-11-01 07:19:37'),
 (3, 'Library', '7894', 'LIb', '2021-05-21 08:27:45'),
-(4, 'Computer science ', '123', 'CsE', '2024-03-20 17:23:17'),
+(4, 'Computer science ', '123', 'Cs', '2024-03-20 17:23:17'),
 (5, 'Mechanical', '7734', 'ME', '2024-04-04 14:01:52');
 
 -- --------------------------------------------------------
@@ -99,25 +99,33 @@ CREATE TABLE `tblemployees` (
   `Status` int(1) NOT NULL,
   `RegDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `role` varchar(30) NOT NULL,
-  `location` varchar(200) NOT NULL
+  `location` varchar(200) NOT NULL,
+  `aadhar_pdf` varchar(255) NOT NULL,
+  `pan_pdf` varchar(255) NOT NULL,
+  `ssc_pdf` varchar(255) NOT NULL,
+  `hsc_pdf` varchar(255) NOT NULL,
+  `be_pdf` varchar(255) NOT NULL,
+  `pg_pdf` varchar(255) NOT NULL,
+  `phd_pdf` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblemployees`
 --
 
-INSERT INTO `tblemployees` (`emp_id`, `FirstName`, `LastName`, `EmailId`, `Password`, `Gender`, `Dob`, `Department`, `Address`, `Av_leave`, `Phonenumber`, `emp`, `aadhar`, `pan`, `caste`, `subcaste`, `ssc`, `hsc`, `be`, `pg`, `phd`, `publication`, `journal`, `patent`, `Status`, `RegDate`, `role`, `location`) VALUES
-(0, 'Edemy', 'Mcwilliams', 'james@gmail.com', '202cb962ac59075b964b07152d234b70', 'Male', '3 February, 1990', 'Cs', 'N NEPO', '30', '8587944255', 2130190, 2147483647, 'opi789yuo', 'hindu', 'hindu', '78', '78', '89', '81', '76', 'abc', 'abc', 'abc', 1, '2017-11-10 13:40:02', 'Admin', 'OIP.jpg'),
-(4, 'Nathaniel', 'Nkrumah', 'nat@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Male', '3 February, 1990', 'ICT', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'Admin', 'NO-IMAGE-AVAILABLE.jpg'),
-(5, 'Gideon', 'Annan', 'gideon@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Male', '3 February, 1990', 'ICT', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'HOD', 'photo5.jpg'),
-(7, 'Bridget', 'Gafa', 'bridget@gmail.com', '202cb962ac59075b964b07152d234b70', 'Female', '3 February, 1990', 'ICT', 'N NEPO', '-4', '0596667981', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'Staff', '1920_File_logo4.png'),
-(8, 'Anna', 'Mensah', 'an@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Female', '3 February, 1990', 'LIb', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'HOD', 'NO-IMAGE-AVAILABLE.jpg'),
-(10, 'prem', 'shinde', 'prem@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '11 October 2023', 'ICT', 'jdli', '9', '07499034380', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2023-10-07 08:30:58', 'Staff', 'NO-IMAGE-AVAILABLE.jpg'),
-(11, 'aakash', 'Kolhapure', 'aakash@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '08/03/2007', 'ICT', 'satara', '21', '07499034380', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2024-03-19 15:04:11', 'Staff', 'NO-IMAGE-AVAILABLE.jpg'),
-(12, 'ron', 'sharma', 'ron@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'male', '07 March 2024', 'ICT', 'pune', '20', '08983081348', 894, 78944646, 'fsd45524dsds', 'sd', 'sdf', '4565', '55', '54', '54', '45', 'sd', 'df', 'df', 1, '2024-03-19 16:43:14', 'Principal', 'OIP.jpg'),
-(123, 'Aditya', 'kadam', 'aadityakolhapure28@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '29 March 2024', 'ICT', 'st colony satara', '8', '8983081348', 123, 41456, '2242', 'asd', 'fdsf', '89', '89', '89', '48', '78', '44', 'dsjk', 'asknda', 1, '2024-03-20 10:27:59', 'Staff', 'certi.jpg'),
-(12334, 'pranav', 'kadam', 'pravan@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '07 March 2024', 'Cs', 'satara', '30', '123465432', 12334, 5464646, 'sffsaf545ef', 'asd', 'dasd', '78', '45', '45', '54', '45', 'adas', 'ds', 'as', 1, '2024-03-20 16:11:33', 'HOD', 'Screenshot (140).png'),
-(123456793, 'Rushikesh', 'mote', 'rushi@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '20 April 2003', 'ME', 'satara', '30', '1234567890', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2024-04-04 14:37:39', 'Staff', 'NO-IMAGE-AVAILABLE.jpg');
+INSERT INTO `tblemployees` (`emp_id`, `FirstName`, `LastName`, `EmailId`, `Password`, `Gender`, `Dob`, `Department`, `Address`, `Av_leave`, `Phonenumber`, `emp`, `aadhar`, `pan`, `caste`, `subcaste`, `ssc`, `hsc`, `be`, `pg`, `phd`, `publication`, `journal`, `patent`, `Status`, `RegDate`, `role`, `location`, `aadhar_pdf`, `pan_pdf`, `ssc_pdf`, `hsc_pdf`, `be_pdf`, `pg_pdf`, `phd_pdf`) VALUES
+(0, 'Edemy', 'Mcwilliams', 'james@gmail.com', '202cb962ac59075b964b07152d234b70', 'Male', '3 February, 1990', 'Cs', 'N NEPO', '30', '8587944255', 2130190, 2147483647, 'opi789yuo', 'hindu', 'hindu', '78', '78', '89', '81', '76', 'abc', 'abc', 'abc', 1, '2017-11-10 13:40:02', 'Admin', 'OIP.jpg', '', '', '', '', '', '', ''),
+(4, 'Nathaniel', 'Nkrumah', 'nat@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Male', '3 February, 1990', 'ICT', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'Admin', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', ''),
+(5, 'Gideon', 'Annan', 'gideon@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Male', '3 February, 1990', 'ICT', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'HOD', 'photo5.jpg', '', '', '', '', '', '', ''),
+(7, 'Bridget', 'Gafa', 'bridget@gmail.com', '202cb962ac59075b964b07152d234b70', 'Female', '3 February, 1990', 'ICT', 'N NEPO', '-4', '0596667981', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'Staff', '1920_File_logo4.png', '', '', '', '', '', '', ''),
+(8, 'Anna', 'Mensah', 'an@gmail.com', 'b4cc344d25a2efe540adbf2678e2304c', 'Female', '3 February, 1990', 'LIb', 'N NEPO', '30', '587944255', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2017-11-10 13:40:02', 'HOD', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', ''),
+(10, 'prem', 'shinde', 'prem@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '11 October 2023', 'ICT', 'jdli', '9', '07499034380', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2023-10-07 08:30:58', 'Staff', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', ''),
+(11, 'aakash', 'Kolhapure', 'aakash@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '08/03/2007', 'ICT', 'satara', '21', '07499034380', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2024-03-19 15:04:11', 'Staff', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', ''),
+(12, 'ron', 'sharma', 'ron@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'male', '07 March 2024', 'ICT', 'pune', '20', '08983081348', 894, 78944646, 'fsd45524dsds', 'sd', 'sdf', '4565', '55', '54', '54', '45', 'sd', 'df', 'df', 1, '2024-03-19 16:43:14', 'Principal', 'OIP.jpg', '', '', '', '', '', '', ''),
+(123, 'Aaditya', 'kolhapure', 'aadityakolhapure28@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '29 March 2024', 'Cs', 'st colony satara', '8', '8983081348', 123, 41456, '2242', 'asd', 'fdsf', '89', '89', '89', '48', '78', '44', 'dsjk', 'asknda', 1, '2024-03-20 10:27:59', 'Staff', 'OIP.jpg', 'asd2.pdf', '10th result.pdf', 'dataBase.pdf', 'DigitalLogic_FlipFlops.pdf', 'exp 5 se.pdf', 'php.pdf', 'unit 1.pdf'),
+(12334, 'pranav', 'kadam', 'pravan@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '07 March 2024', 'Cs', 'satara', '30', '123465432', 12334, 5464646, 'sffsaf545ef', 'asd', 'dasd', '78', '45', '45', '54', '45', 'adas', 'ds', 'as', 1, '2024-03-20 16:11:33', 'HOD', 'Screenshot (140).png', '', '', '', '', '', '', ''),
+(123456793, 'Rushikesh', 'mote', 'rushi@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '20 April 2003', 'ME', 'satara', '30', '1234567890', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2024-04-04 14:37:39', 'Staff', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', ''),
+(123456794, 'amit', 'Patil', 'amit@gmail.com', '202cb962ac59075b964b07152d234b70', 'male', '04 April 2003', 'Cs', 'pune', '30', '123465432', 0, 0, '', '', '', '', '', '', '', '', '', '', '', 1, '2024-04-11 08:15:19', 'Staff', 'NO-IMAGE-AVAILABLE.jpg', '', '', '', '', '', '', '');
 
 --
 -- Triggers `tblemployees`
@@ -171,10 +179,8 @@ INSERT INTO `tblleaves` (`id`, `LeaveType`, `ToDate`, `FromDate`, `Description`,
 (22, 'Casual Leave', '22-03-2024', '23-03-2024', 'xyz', '2024-03-21', 'abc', 'abc\r\n', '2024-03-21 10:48:09 ', 1, 1, 1, 12345, 2),
 (24, 'Medical Leave', '30-03-2024', '31-03-2024', '123', '2024-03-29', 'zxcv', '', '2024-03-29 21:04:17 ', 1, 0, 1, 12345, 2),
 (25, 'family Leave', '05-04-2024', '06-04-2024', 'abc', '2024-04-04', 'asd', 'Leave was Rejected. Registra/Registry will not see it', '2024-04-04 19:45:22 ', 1, 2, 1, 12345, 2),
-(27, 'Other', '13-04-2024', '14-04-2024', 'fffffffffff', '2024-04-05', 'vdcv', 'kvd', '2024-04-05 14:12:33 ', 1, 2, 1, 123456, 2),
-(28, 'Emergency ', '16-04-2024', '17-04-2024', 'qwe', '2024-04-06', 'abc', 'asd', '2024-04-06 19:30:58 ', 1, 2, 1, 123456, 2),
-(29, 'family Leave', '09-04-2024', '09-04-2024', 'asd', '2024-04-06', 'asd', '', '2024-04-06 21:00:24 ', 1, 0, 1, 123456, 1),
-(30, 'Other', '13-04-2024', '14-04-2024', 'qwe', '2024-04-06', 'wer', 'Leave was Rejected. Registra/Registry will not see it', '2024-04-06 21:05:32 ', 2, 2, 1, 123456, 2);
+(30, 'Other', '13-04-2024', '14-04-2024', 'qwe', '2024-04-06', 'wer', 'Leave was Rejected. Registra/Registry will not see it', '2024-04-06 21:05:32 ', 2, 2, 1, 123456, 2),
+(31, 'Medical Leave', '12-04-2024', '12-04-2024', 'qwe', '2024-04-11', NULL, '', NULL, 0, 0, 1, 123, 1);
 
 -- --------------------------------------------------------
 
@@ -257,13 +263,13 @@ ALTER TABLE `tbldepartments`
 -- AUTO_INCREMENT for table `tblemployees`
 --
 ALTER TABLE `tblemployees`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123456794;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123456795;
 
 --
 -- AUTO_INCREMENT for table `tblleaves`
 --
 ALTER TABLE `tblleaves`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tblleavetype`

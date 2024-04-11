@@ -168,7 +168,8 @@ if (isset($_GET['delete'])) {
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="edit_staff.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="leave_history.php?emp_id=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Leave History</a>
+												<a class="dropdown-item" href="leave_history.php?emp_id=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Leave history</a>
+												<a class="dropdown-item" href="document.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i>View Document</a>
 
 												<a class="dropdown-item" href="staff.php?delete=<?php echo $row['emp_id'] ?>"><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
@@ -182,22 +183,6 @@ if (isset($_GET['delete'])) {
 						<div class="form-group">
 							<label></label>
 							<div class="modal-footer justify-content-center">
-
-								<button class="btn btn-primary" onclick="exportData()">Export Data</button>
-								<script>
-									function exportData() {
-										// // Make an AJAX request to the PHP script
-										var xhr = new XMLHttpRequest();
-										xhr.onreadystatechange = function() {
-										if (xhr.readyState === 4 && xhr.status === 200) {
-											console.log(xhr.responseText);
-											}
-									    };
-										xhr.open('GET', 'includes/data.php?export=1', true);
-										xhr.send();
-
-									}
-								</script>
 							</div>
 						</div>
 					</div>

@@ -29,7 +29,7 @@
 
 				<li class="dropdown">
 					<a href="document.php" class="dropdown-toggle no-arrow">
-						<span class="micon dw dw-house-1"></span><span class="mtext">Upload</span>
+						<span class="micon dw dw-edit-2"></span><span class="mtext">Upload</span>
 					</a>
 
 				</li>

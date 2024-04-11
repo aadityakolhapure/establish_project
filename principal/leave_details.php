@@ -299,39 +299,9 @@
 							  {
 
 							 ?>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label style="font-size:16px;"><b></b></label>
-									<div class="modal-footer justify-content-center">
-										<button class="btn btn-primary" id="action_take" data-toggle="modal" data-target="#success-modal">Take&nbsp;Action</button>
-									</div>
-								</div>
-							</div>
+							
 
-							<form name="adminaction" method="post">
-  								<div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-body text-center font-18">
-												<h4 class="mb-20">Leave take action</h4>
-												<select name="status" required class="custom-select form-control">
-													<option value="">Choose your option</option>
-				                                          <option value="1">Recommend</option>
-				                                          <option value="2">Not Recommend</option>
-												</select>
-
-												<div class="form-group">
-													<label></label>
-													<textarea id="textarea1" name="description" class="form-control" required placeholder="Description" length="300" maxlength="300"></textarea>
-												</div>
-											</div>
-											<div class="modal-footer justify-content-center">
-												<input type="submit" class="btn btn-primary" name="update" value="Submit">
-											</div>
-										</div>
-									</div>
-								</div>
-  							</form>
+							
 
 							 <?php }?> 
 						</div>

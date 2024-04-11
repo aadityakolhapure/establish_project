@@ -38,7 +38,7 @@ if (isset($_GET['delete'])) {
 	<div class="main-container">
 		<div class="pd-ltr-20">
 			<div class="title pb-20">
-				<h2 class="h3 mb-0">Administrative Breakdown</h2>
+				<h2 class="h3 mb-0">HOD Breakdown</h2>
 			</div>
 			<div class="row pb-10">
 				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
@@ -170,6 +170,8 @@ if (isset($_GET['delete'])) {
 											</a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 												<a class="dropdown-item" href="edit_staff.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Edit</a>
+												<a class="dropdown-item" href="document.php?edit=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i>View Document</a>
+												<a class="dropdown-item" href="leave_history.php?emp_id=<?php echo $row['emp_id']; ?>"><i class="dw dw-edit2"></i> Leave History</a>
 												<a class="dropdown-item" href="staff.php?delete=<?php echo $row['emp_id'] ?>"><i class="dw dw-delete-3"></i> Delete</a>
 											</div>
 										</div>
