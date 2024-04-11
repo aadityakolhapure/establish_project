@@ -41,7 +41,7 @@
 					<div class="sidebar-small-cap">Extra</div>
 				</li>
 				<li>
-					<a href="#" class="dropdown-toggle no-arrow">
+					<a href="https://www.dnyanshree.edu.in" class="dropdown-toggle no-arrow">
 						<span class="micon dw dw-edit-2"></span><span class="mtext">Visit Us</span>
 					</a>
 				</li>

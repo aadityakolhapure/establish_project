@@ -190,10 +190,10 @@
 										<td><?php $stats = $result->Status;
 											if ($stats == 1) {
 											?>
-												<span style="color: green">Approved</span>
+												<span style="color: green">Recommend</span>
 											<?php }
 											if ($stats == 2) { ?>
-												<span style="color: red">Not Approved</span>
+												<span style="color: red">Not Recommend</span>
 											<?php }
 											if ($stats == 0) { ?>
 												<span style="color: blue">Pending</span>
