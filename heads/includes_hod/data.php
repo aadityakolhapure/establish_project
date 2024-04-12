@@ -1,11 +1,13 @@
 <?php
 // Check if the 'export' button was clicked
+include('../../includes/session.php');
 if (isset($_POST['export'])) {
     // Establish database connection
     $conn = mysqli_connect('localhost', 'root', '', 'project') or die(mysqli_error());
 
     // SQL query to select data from your table
-    $sql = "SELECT * FROM tblemployees";
+   
+    $sql = "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

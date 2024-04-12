@@ -2,9 +2,9 @@
 include('includes/header.php');
 include('../includes/session.php');
 ?>
-    <link rel="stylesheet" href="../js/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../js/css/bootstrap.min.css">
     <link rel="stylesheet" href="../js/css/datatables.min.css">
-    <link rel="stylesheet" href="../js/css/style.css">
+    <link rel="stylesheet" href="../js/css/style.css"> -->
 
 <body>
 	<div class="pre-loader">
@@ -50,6 +50,9 @@ include('../includes/session.php');
 				<div class="pd-20">
 					<h2 class="text-blue h4">LEAVE HISTORY</h2>
 				</div>
+				<div class="col-md-5">
+					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
+				</div>
 				<div class="pb-20">
 					<table class="data-table table stripe hover nowrap" id="example">
 						<thead>
@@ -94,13 +97,17 @@ include('../includes/session.php');
 			<?php include('includes/footer.php'); ?>
 		</div>
 	</div>
-	<script src="../js/bootstrap.bundle.min.js"></script>
-	<script src="../js/custom.js"></script>
-	<script src="../js/datatables.min.js"></script>
-	<script src="../js/jquery-3.6.0.min.js"></script>
-	<script src="../js/pdfmake.min.js"></script>
-	<script src="../js/vfs_fonts.js"></script>
-	<!-- js -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#searchInput2").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#example tbody tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
 	<?php include('includes/scripts.php') ?>
 </body>
 

@@ -257,8 +257,12 @@
 				<div class="pd-20">
 					<h2 class="text-blue h4">LATEST LEAVE APPLICATIONS</h2>
 				</div>
-				<div class="pb-20">
-					<table class="data-table table stripe hover nowrap">
+				<div class="col-md-5">
+					<input type="text" id="searchInput" class="form-control" placeholder="Search....">
+				</div>
+				<div class="pb-20"> 
+
+					<table class="data-table table stripe hover nowrap" id="leaveTable">
 						<thead>
 							<tr>
 								<th class="table-plus datatable-nosort">STAFF NAME</th>
@@ -336,6 +340,17 @@
 		</div>
 	</div>
 	<!-- js -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#searchInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#leaveTable tbody tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
 
 	<?php include('includes/scripts.php') ?>
 </body>

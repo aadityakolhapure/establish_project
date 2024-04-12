@@ -126,8 +126,11 @@ if (isset($_GET['delete'])) {
 				<div class="pd-20">
 					<h2 class="text-blue h4">ALL EMPLOYEES</h2>
 				</div>
+				<div class="col-md-5">
+					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
+				</div>
 				<div class="pb-20">
-					<table class="data-table table stripe hover nowrap">
+					<table class="data-table table stripe hover nowrap" id="table28">
 						<thead>
 							<tr>
 								<th class="table-plus">FULL NAME</th>
@@ -144,7 +147,7 @@ if (isset($_GET['delete'])) {
 								<?php
 								//  $teacher_query = mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 
-								$teacher_query = mysqli_query($conn,"select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
+								$teacher_query = mysqli_query($conn, "select * from tblemployees LEFT JOIN tbldepartments ON tblemployees.Department = tbldepartments.DepartmentShortName where tblemployees.role = 'Staff' and tblemployees.Department = '$session_depart' ORDER BY tblemployees.emp_id") or die(mysqli_error());
 								while ($row = mysqli_fetch_array($teacher_query)) {
 									$id = $row['emp_id'];
 								?>
@@ -180,13 +183,38 @@ if (isset($_GET['delete'])) {
 						<?php } ?>
 						</tbody>
 					</table>
+					<div class="weight-500 col-md-6">
+						<div class="form-group">
+							<label></label>
+							<div class="modal-footer justify-content-center">
+
+								<form method="post" action="includes_hod/data.php">
+									<button type="submit" name="export">Download CSV</button>
+								</form>
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-
-			<?php include('includes_hod/footer.php'); ?>
 		</div>
+
+		<?php include('includes_hod/footer.php'); ?>
+	</div>
 	</div>
 	<!-- js -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#searchInput2").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#table28 tbody tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
+
 
 	<?php include('includes_hod/scripts.php') ?>
 </body>

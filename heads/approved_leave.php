@@ -14,13 +14,9 @@
 			</div>
 		</div>
 	</div>
-
 	<?php include('includes_hod/navbar.php') ?>
-
 	<?php include('includes_hod/right_sidebar.php') ?>
-
 	<?php include('includes_hod/left_sidebar.php') ?>
-
 	<div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
@@ -33,7 +29,7 @@
 						</div>
 						<nav aria-label="breadcrumb" role="navigation">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
+								<li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">Approved Leave</li>
 							</ol>
 						</nav>
@@ -45,8 +41,11 @@
 				<div class="pd-20">
 					<h2 class="text-blue h4">APPROVED LEAVE</h2>
 				</div>
+				<div class="col-md-5">
+					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
+				</div>
 				<div class="pb-20">
-					<table class="data-table table stripe hover nowrap">
+					<table class="data-table table stripe hover nowrap" id="example">
 						<thead>
 							<tr>
 								<th class="table-plus datatable-nosort">STAFF NAME</th>
@@ -139,7 +138,21 @@
 	<script src="../src/plugins/datatables/js/vfs_fonts.js"></script>
 
 	<script src="../vendors/scripts/datatable-setting.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script> -->
+		$(document).ready(function() {
+			$("#searchInput2").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#example tbody tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
 </body>
 </body>
 
 </html>
+
+
+

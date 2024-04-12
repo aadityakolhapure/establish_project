@@ -2,9 +2,9 @@
 include('includes/header.php');
 include('../includes/session.php');
 ?>
-    <link rel="stylesheet" href="../js/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../js/css/datatables.min.css">
-    <link rel="stylesheet" href="../js/css/style.css">
+<!-- <link rel="stylesheet" href="../js/css/bootstrap.min.css">
+<link rel="stylesheet" href="../js/css/datatables.min.css">
+<link rel="stylesheet" href="../js/css/style.css"> -->
 
 <body>
 	<div class="pre-loader">
@@ -45,10 +45,12 @@ include('../includes/session.php');
 					</div>
 				</div>
 			</div>
-
 			<div class="card-box mb-30">
 				<div class="pd-20">
 					<h2 class="text-blue h4">LEAVE HISTORY</h2>
+				</div>
+				<div class="col-md-5">
+					<input type="text" id="searchInput2" class="form-control" placeholder="Search....">
 				</div>
 				<div class="pb-20">
 					<table class="data-table table stripe hover nowrap" id="example">
@@ -64,12 +66,12 @@ include('../includes/session.php');
 						</thead>
 						<tbody>
 							<?php
+							// Database query to fetch leave records based on user role and department
 							$sql = "SELECT tblleaves.id as leave_id, tblemployees.FirstName, tblemployees.LastName, tblleaves.LeaveType, tblleaves.PostingDate, tblleaves.Status as hod_status, tblleaves.admin_status
-                                    FROM tblleaves 
-                                    INNER JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id";
+							FROM tblleaves 
+							INNER JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id ";
 							$result = mysqli_query($conn, $sql);
-
-							if (mysqli_num_rows($result) > 0) {
+							if ($result && mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
 									echo "<tr>";
 									echo "<td class='table-plus'>" . $row['FirstName'] . " " . $row['LastName'] . "</td>";
@@ -90,18 +92,43 @@ include('../includes/session.php');
 					</table>
 				</div>
 			</div>
-
 			<?php include('includes/footer.php'); ?>
 		</div>
 	</div>
-	<script src="../js/bootstrap.bundle.min.js"></script>
-	<script src="../js/custom.js"></script>
-	<script src="../js/datatables.min.js"></script>
-	<script src="../js/jquery-3.6.0.min.js"></script>
-	<script src="../js/pdfmake.min.js"></script>
-	<script src="../js/vfs_fonts.js"></script>
 	<!-- js -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#searchInput2").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#example tbody tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
+
+	<script src="../vendors/scripts/core.js"></script>
+	<script src="../vendors/scripts/script.min.js"></script>
+	<script src="../vendors/scripts/process.js"></script>
+	<script src="../vendors/scripts/layout-settings.js"></script>
+	<script src="../src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="../src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+
+	<script src="../src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="../src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+	<script src="../src/plugins/datatables/js/buttons.print.min.js"></script>
+	<script src="../src/plugins/datatables/js/buttons.html5.min.js"></script>
+	<script src="../src/plugins/datatables/js/buttons.flash.min.js"></script>
+	<script src="../src/plugins/datatables/js/vfs_fonts.js"></script>
 	<?php include('includes/scripts.php') ?>
 </body>
 
 </html>
+
+<!-- SELECT tblleaves.id as leave_id, tblemployees.FirstName, tblemployees.LastName, tblleaves.LeaveType, tblleaves.PostingDate, tblleaves.Status as hod_status, tblleaves.admin_status
+                                    FROM tblleaves 
+                                    INNER JOIN tblemployees ON tblleaves.empid = tblemployees.emp_id -->

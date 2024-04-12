@@ -162,9 +162,7 @@ if (isset($_POST["update_image"])) {
 							<div class="profile-tab height-100-p">
 								<div class="tab height-100-p">
 									<ul class="nav nav-tabs customtab" role="tablist">
-										<li class="nav-item">
-											<a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">Leave Records</a>
-										</li>
+										
 										<li class="nav-item">
 											<a class="nav-link" data-toggle="tab" href="#setting" role="tab">Settings</a>
 										</li>
